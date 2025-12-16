@@ -5,12 +5,10 @@ import { MoviesList } from './components/MoviesList';
 import moviesFromServer from './api/movies.json';
 
 const getPrepearedMovies = (movies, { filter }) => {
-  const preparedMovies = [...movies];
-
-  if (!filter) return preparedMovies;
+  if (!filter) return movies;
   const normalizedFilter = filter.toLowerCase().trim();
 
-  return preparedMovies.filter(({ title, description }) => {
+  return movies.filter(({ title, description }) => {
     return [title, description].some(text => {
       return text.toLowerCase().includes(normalizedFilter);
     });
@@ -34,7 +32,7 @@ export const App = () => {
             <div className="control">
               <input
                 value={filter}
-                onChange={e => setFilter(e.target.value)}
+                onChange={event => setFilter(event.target.value)}
                 type="text"
                 id="search-query"
                 className="input"
